@@ -24,6 +24,7 @@ Usage
 ### Get functions
 * [directory](#directory)
 * [fileName](#fileName)
+* [fileExt](#fileExt)
 * [dirStat](#dirStat)
 
 ### Other
@@ -153,6 +154,20 @@ __Examples__
 
 ```javascript
 get.fileName('/path/here/.env.test') // .env.test
+```
+
+<a name="fileExt" />
+
+### fileExt(path)
+
+returns string has file extension.
+
+
+__Examples__
+
+```javascript
+get.fileExt('/path/here/.env.test') // env
+get.fileExt('/path/here/filename.txt') // txt
 ```
 
 <a name="dirStat" />

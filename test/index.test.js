@@ -107,6 +107,23 @@ describe('path-resolver: Pathre', () => {
       it('fileName returns false, when sending directory without file', () => {
         expect(get.fileName(testfiles)).to.equal(false);
       });
+      describe('fileExt', () => {
+        it('returns txt filename.txt', () => {
+          expect(get.fileExt(path.join(__dirname, 'filename.txt'))).to.equal('txt');
+        });
+        it('returns docs filename.docs', () => {
+          expect(get.fileExt(path.join(__dirname, 'filename.docs'))).to.equal('docs');
+        });
+        it('returns env .env.filename.docs', () => {
+          expect(get.fileExt(path.join(__dirname, '.env.filename'))).to.equal('env');
+        });
+        it('returns ext filename.with.many.dots.ext', () => {
+          expect(get.fileExt(path.join(__dirname, 'filename.with.many.dots.ext'))).to.equal('ext');
+        });
+        it('returns false for invalid fileExt', () => {
+          expect(get.fileExt(path.join(__dirname, 'filename'))).to.equal(false);
+        });
+      });
       // it('filePath returns false, when sending directory without file', () => {
       //   expect(get.filePath(testfiles)).to.equal(false);
       // });
@@ -117,6 +134,7 @@ describe('path-resolver: Pathre', () => {
     it('returns directory when sending dir', () => {
       expect(get.directory(testfiles)).to.equal(testfiles);
     });
+
     // it('returns filePath, for dir including file name, ', () => {
     //   expect(get.filePath(empty)).to.equal(empty);
     // });

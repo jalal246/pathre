@@ -17,6 +17,36 @@ const directory = dir => (
 // get the file name form directory.
 const fileName = dir => !check.isDir(dir) && path.parse(dir).base;
 
+/*
+  following functions use to get file extension.
+*/
+
+// check if fileName starts with dot.
+const isStartWithDot = (str, cb) => cb(str.slice(0, 1) === '.');
+
+// split the name by dot.
+const splitByDot = str => str.split('.');
+
+// gets the first array elem from split; like .env
+const splitDotFrmStart = str => splitByDot(str)[1];
+
+// gets the last array elem from split; like .txt
+const splitDotFrmEnd = (str) => {
+  const snm = splitByDot(str);
+  return snm[snm.length - 1];
+};
+
+
+// get the file extension form directory.
+const fileExt = (dir) => {
+  const fn = fileName(dir);
+  if (fn) {
+    // if fn invalid, fileName will returns false.
+    return isStartWithDot(fn, withDot => (withDot ? splitDotFrmStart(fn) : splitDotFrmEnd(fn)));
+  }
+  // return false when we have invalid fn
+  return fn;
+};
 
 /**
  * returns directory stats, as object
@@ -82,5 +112,6 @@ module.exports = {
   // get
   directory,
   fileName,
+  fileExt,
   dirStat,
 };
