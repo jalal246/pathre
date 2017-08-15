@@ -1,6 +1,6 @@
 {
   "name": "pathre",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "lib/index.js",
   "directories": {
@@ -15,26 +15,20 @@
     "report:cov": "cat ./coverage/lcov.info | codecov",
     "prebuild": "rimraf lib",
     "build": "babel --out-dir lib src",
-    "prepublish": "npm run build"
+    "prepublishOnly": "npm test && npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jimmy02020/pathre.git"
   },
   "keywords": [
-    "javascript-tools",
-    "javascript",
-    "nodejs",
-    "node",
-    "node-js",
-    "nodejs-modules",
-    "node-modules",
-    "functions",
-    "random",
     "fs",
     "file",
     "path",
-    "directory"
+    "directory",
+    "validation",
+    "get",
+    "is"
   ],
   "files": [
     "lib",

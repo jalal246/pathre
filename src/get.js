@@ -49,7 +49,7 @@ const fileExt = (dir) => {
 };
 
 /**
- * returns directory stats, as object
+ * returns path statistics as object
  *
  * @param {string} dir  - directory.
  * @callback {Requester~requestCallback}
@@ -61,7 +61,7 @@ const fileExt = (dir) => {
  * @property {Boolean} - isFile, if any.
  * @property {number} - size of file if avaliable.
  */
-const dirStat = (dir, cb) => fs.stat(dir, (err, stats) => {
+const pathStat = (dir, cb) => fs.stat(dir, (err, stats) => {
   let isValid;
   let isDir;
   let isFile;
@@ -113,5 +113,5 @@ module.exports = {
   directory,
   fileName,
   fileExt,
-  dirStat,
+  pathStat,
 };

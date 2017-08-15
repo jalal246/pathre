@@ -6,13 +6,13 @@
 
 Overview
 --------
-Pathre is path-resolver utility functions for [node](https://nodejs.org/en/).
+`Pathre` is path-resolver utility functions for [node](https://nodejs.org/en/).
 
-Pathre consists of validation-functions and get-functions which makes dealing with path super simple and easy.
+`Pathre` consists of __validation-functions__ and __get-functions__ which makes dealing with path super simple and easy.
 
 
 Usage
--------------
+-----------
 
 ### Validation functions
 * [isValid](#isValid)
@@ -25,7 +25,7 @@ Usage
 * [directory](#directory)
 * [fileName](#fileName)
 * [fileExt](#fileExt)
-* [dirStat](#dirStat)
+* [pathStat](#pathStat)
 
 ### Other
 * [Tests](#Tests)
@@ -55,7 +55,7 @@ const { check } = require('pathre')
 
 ### isValid(path)
 
-If path is valid returns true, otherwise returns false.
+Validate given path. If path is valid returns true, otherwise returns false.
 
 __Examples__
 
@@ -67,7 +67,7 @@ check.isValid(path.join(__dirname)) // true
 
 ### isDir(path)
 
-If path is directory not file returns true, otherwise returns false.
+If path is for directory (not file) returns true, otherwise returns false.
 
 __Examples__
 
@@ -79,7 +79,7 @@ check.isDir('/path/here/test.txt') // false
 
 ### isFile(path)
 
-If undefined returns true, otherwise returns false.
+If path is for file (not directory) returns true, otherwise returns false.
 
 __Examples__
 
@@ -90,13 +90,15 @@ check.isFile('/path/here/test.txt') // true
 
 ### isExistent(path, callback)
 
-returns callback function, if path is valid/existent returns true, otherwise returns false.
+If path is valid/existent returns true, otherwise returns false.
+
+_NOTE_: Path can be valid path but not for existence path. If you check for existence use `isExistent` if you validate the path before create it use `isValid`.
 
 __Examples__
 
 ```javascript
-isExistent('/here/dir', callback => {
-  if(callback){
+isExistent('/here/dir', (isExsist) => {
+  if(isExsist){
     // do something
     console.log("valid");
   } else {
@@ -109,13 +111,13 @@ isExistent('/here/dir', callback => {
 
 ### isZeroSize(path, callback)
 
-returns callback function, if file is valid and zero size then true, otherwise returns false.
+If file is valid and zero size then true, otherwise returns false.
 
 __Examples__
 
 ```javascript
-isZeroSize('/here/dir/empty.txt', callback => {
-  if(callback){
+isZeroSize('/here/dir/empty.txt', (isZero) => {
+  if(isZero){
     // do something
     console.log("file is empty");
   } else {
@@ -135,7 +137,7 @@ const { get } = require('pathre')
 
 ### directory(path)
 
-returns string has directory name whether it has file name with it or not.
+Returns string has directory name, whether the path is with file name or without it.
 
 
 __Examples__
@@ -147,7 +149,7 @@ get.directory('/path/here/.env.test') // '/path/here
 
 ### fileName(path)
 
-returns string has file name.
+Returns string has file name.
 
 
 __Examples__
@@ -160,7 +162,7 @@ get.fileName('/path/here/.env.test') // .env.test
 
 ### fileExt(path)
 
-returns string has file extension.
+Returns string has file extension.
 
 
 __Examples__
@@ -172,15 +174,23 @@ get.fileExt('/path/here/filename.txt') // txt
 
 <a name="dirStat" />
 
-### dirStat(path, callback)
+### pathStat(path, callback)
 
-gets the main properties from path and returns object has:
-``{isValid, isDir, isFile, size}``
+Gets the main properties from path.
+
+The callback returns one argument object  `(stat)`:
+
+`stat` has:
+
+* `isValid`
+* `isDir`
+* `isFile`
+* `size`
 
 __Examples__
 
 ```javascript
-get.dirStat('dir/here/emptyfile.txt', (err, obj) => {
+get.pathStat('dir/here/emptyfile.txt', (err, obj) => {
   console.log(obj);
   //
   {
