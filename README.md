@@ -6,10 +6,7 @@
 
 Overview
 --------
-`Pathre` is path-resolver utility functions for [node](https://nodejs.org/en/).
-
-`Pathre` consists of __validation-functions__ and __get-functions__ which makes dealing with path super simple and easy.
-
+`Pathre` is path-resolver utility functions for [node](https://nodejs.org/en/). `Pathre` consists of __validation__ and __get__  functions which make dealing with path super simple and easy.
 
 Usage
 -----------
@@ -172,15 +169,15 @@ get.fileExt('/path/here/.env.test') // env
 get.fileExt('/path/here/filename.txt') // txt
 ```
 
-<a name="dirStat" />
+<a name="pathStat" />
 
 ### pathStat(path, callback)
 
 Gets the main properties from path.
 
-The callback returns one argument object  `(stat)`:
+The callback gets two arguments `(err, stat)`.
 
-`stat` has:
+`stat` object consists of:
 
 * `isValid`
 * `isDir`
@@ -190,8 +187,8 @@ The callback returns one argument object  `(stat)`:
 __Examples__
 
 ```javascript
-get.pathStat('dir/here/emptyfile.txt', (err, obj) => {
-  console.log(obj);
+get.pathStat('dir/here/emptyfile.txt', (err, stat) => {
+  console.log(stat);
   //
   {
     isValid: true,
