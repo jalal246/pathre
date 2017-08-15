@@ -141,12 +141,12 @@ describe('path-resolver: Pathre', () => {
     it('returns file name, for dir including file name', () => {
       expect(get.fileName(empty)).to.equal(EMPTY_FILE_NAME);
     });
-    describe('get-functions:dirStat, returns cb', () => {
+    describe('get-functions:pathStat, returns cb', () => {
       describe('invalidtion', () => {
         describe('isValid: false', () => {
           it('returns isValid: false isFile:false isDir:false for invalid dir', (done) => {
             assert.doesNotThrow(() => {
-              get.dirStat('noDir', (err, obj) => {
+              get.pathStat('noDir', (err, obj) => {
                 expect(obj).to.be.deep.equal({
                   isValid: false,
                   isDir: false,
@@ -159,7 +159,7 @@ describe('path-resolver: Pathre', () => {
           });
           it('returns isValid: false isFile:true isDir:false for non existence dir', (done) => {
             assert.doesNotThrow(() => {
-              get.dirStat(noDir, (err, obj) => {
+              get.pathStat(noDir, (err, obj) => {
                 expect(obj).to.be.deep.equal({
                   isValid: false,
                   isDir: true,
@@ -172,7 +172,7 @@ describe('path-resolver: Pathre', () => {
           });
           it('returns isValid: false isFile:false isDir:true for non existence file', (done) => {
             assert.doesNotThrow(() => {
-              get.dirStat(nofile, (err, obj) => {
+              get.pathStat(nofile, (err, obj) => {
                 expect(obj).to.be.deep.equal({
                   isValid: false,
                   isDir: false,
@@ -188,7 +188,7 @@ describe('path-resolver: Pathre', () => {
       describe('validtion', () => {
         it('returns isValid: true isFile:false isDir:true size:0 for existence dir', (done) => {
           assert.doesNotThrow(() => {
-            get.dirStat(testfiles, (err, obj) => {
+            get.pathStat(testfiles, (err, obj) => {
               expect(obj.size).to.be.within(0, 44);
               // expect(obj).to.be.deep.equal({
               //   isValid: true,
@@ -202,7 +202,7 @@ describe('path-resolver: Pathre', () => {
         });
         it('returns isValid: false isFile:false isDir:true for existence file', (done) => {
           assert.doesNotThrow(() => {
-            get.dirStat(empty, (err, obj) => {
+            get.pathStat(empty, (err, obj) => {
               expect(obj).to.be.deep.equal({
                 isValid: true,
                 isDir: false,
@@ -215,7 +215,7 @@ describe('path-resolver: Pathre', () => {
         });
         it('returns size:9 for info file', (done) => {
           assert.doesNotThrow(() => {
-            get.dirStat(fileExist, (err, obj) => {
+            get.pathStat(fileExist, (err, obj) => {
               expect(obj).to.be.deep.equal({
                 isValid: true,
                 isDir: false,
