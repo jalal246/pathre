@@ -1,20 +1,23 @@
 {
   "name": "pathre",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "lib/pathre.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "test": "mocha  --compilers js:babel-core/register test",
-    "test:w": "mocha  --compilers js:babel-core/register test -w",
-    "test:cov": "istanbul cover node_modules/mocha/bin/_mocha --  --compilers js:babel-core/register test",
+    "test": "mocha  --compilers js:babel-core/register --recursive test",
+    "test:w": "mocha  --compilers js:babel-core/register --recursive test -w",
+    "test:check": "mocha  --compilers js:babel-core/register test/check.test.js -w",
+    "test:get": "mocha  --compilers js:babel-core/register test/get.test.js -w",
+    "test:cov": "istanbul cover node_modules/mocha/bin/_mocha --  --compilers js:babel-core/register --recursive test",
     "check:cov": "istanbul check-coverage --root coverage --statement 98 --branch 85 --function 95 --line 95",
     "report:cov": "cat ./coverage/lcov.info | codecov",
     "prebuild": "rimraf lib",
-    "build": "babel --out-dir lib src",
+    "build:tr": "babel --out-dir lib src",
+    "build": "webpack -p",
     "prepublishOnly": "npm test && npm run build"
   },
   "repository": {
@@ -48,6 +51,7 @@
     "babel-preset-es2015": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "chai": "4.1.0",
+    "codecov.io": "0.1.6",
     "eslint": "4.3.0",
     "eslint-config-airbnb-base": "11.3.0",
     "eslint-plugin-import": "2.7.0",
@@ -59,5 +63,8 @@
     "presets": [
       "es2015"
     ]
+  },
+  "dependencies": {
+    "textics-stream": "0.0.1"
   }
 }
